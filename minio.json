@@ -16,7 +16,7 @@
   "editable": true,
   "gnetId": 10946,
   "graphTooltip": 0,
-  "iteration": 1577451616519,
+  "iteration": 1577695749322,
   "links": [
     {
       "icon": "external link",
@@ -210,26 +210,26 @@
       "valueName": "avg"
     },
     {
-      "aliasColors": {
-        "available 10.13.1.25:9000": "green",
-        "used 10.13.1.25:9000": "blue"
-      },
+      "aliasColors": {},
       "bars": false,
-      "cacheTimeout": null,
       "dashLength": 10,
       "dashes": false,
       "datasource": "Prometheus",
-      "description": "Storage space usage",
+      "description": "Total user and system CPU time spent in seconds",
+      "editable": true,
+      "error": false,
       "fill": 1,
       "fillGradient": 0,
+      "grid": {},
       "gridPos": {
         "h": 6,
-        "w": 12,
-        "x": 12,
+        "w": 18,
+        "x": 6,
         "y": 0
       },
       "hiddenSeries": false,
-      "id": 8,
+      "id": 14,
+      "isNew": true,
       "legend": {
         "avg": false,
         "current": false,
@@ -241,53 +241,46 @@
         "values": false
       },
       "lines": true,
-      "linewidth": 1,
+      "linewidth": 2,
       "links": [],
-      "nullPointMode": "null",
+      "nullPointMode": "connected",
       "options": {
         "dataLinks": []
       },
       "percentage": false,
-      "pointradius": 2,
+      "pointradius": 5,
       "points": false,
       "renderer": "flot",
-      "seriesOverrides": [],
+      "seriesOverrides": [
+        {
+          "alias": "alloc rate",
+          "yaxis": 2
+        }
+      ],
       "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
       "targets": [
         {
-          "expr": "disk_storage_used{instance=~\"$instance\"}",
+          "expr": "rate(process_cpu_seconds_total{instance=~\"$instance\"}[$interval])",
           "format": "time_series",
-          "hide": false,
-          "interval": "",
           "intervalFactor": 2,
-          "legendFormat": "used {{instance}}",
-          "metric": "process_start_time_seconds",
+          "legendFormat": "Total CPU {{instance}}",
+          "metric": "go_memstats_alloc_bytes",
           "refId": "A",
-          "step": 60
-        },
-        {
-          "expr": "disk_storage_total{instance=~\"$instance\"}",
-          "format": "time_series",
-          "hide": false,
-          "interval": "",
-          "intervalFactor": 2,
-          "legendFormat": "total {{instance}}",
-          "metric": "process_start_time_seconds",
-          "refId": "B",
-          "step": 60
+          "step": 4
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Disk Usage",
+      "title": "Total CPU",
       "tooltip": {
+        "msResolution": false,
         "shared": true,
         "sort": 0,
-        "value_type": "individual"
+        "value_type": "cumulative"
       },
       "type": "graph",
       "xaxis": {
@@ -299,16 +292,15 @@
       },
       "yaxes": [
         {
-          "decimals": null,
-          "format": "decbytes",
+          "format": "s",
           "label": null,
           "logBase": 1,
           "max": null,
-          "min": "0",
+          "min": null,
           "show": true
         },
         {
-          "format": "short",
+          "format": "s",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -627,17 +619,18 @@
       }
     },
     {
-      "aliasColors": {},
+      "aliasColors": {
+        "available 10.13.1.25:9000": "green",
+        "used 10.13.1.25:9000": "blue"
+      },
       "bars": false,
+      "cacheTimeout": null,
       "dashLength": 10,
       "dashes": false,
       "datasource": "Prometheus",
-      "description": "Total user and system CPU time spent in seconds",
-      "editable": true,
-      "error": false,
+      "description": "Storage space usage",
       "fill": 1,
       "fillGradient": 0,
-      "grid": {},
       "gridPos": {
         "h": 7,
         "w": 12,
@@ -645,8 +638,7 @@
         "y": 6
       },
       "hiddenSeries": false,
-      "id": 14,
-      "isNew": true,
+      "id": 8,
       "legend": {
         "avg": false,
         "current": false,
@@ -658,46 +650,53 @@
         "values": false
       },
       "lines": true,
-      "linewidth": 2,
+      "linewidth": 1,
       "links": [],
-      "nullPointMode": "connected",
+      "nullPointMode": "null",
       "options": {
         "dataLinks": []
       },
       "percentage": false,
-      "pointradius": 5,
+      "pointradius": 2,
       "points": false,
       "renderer": "flot",
-      "seriesOverrides": [
-        {
-          "alias": "alloc rate",
-          "yaxis": 2
-        }
-      ],
+      "seriesOverrides": [],
       "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
       "targets": [
         {
-          "expr": "rate(process_cpu_seconds_total{instance=~\"$instance\"}[$interval])",
+          "expr": "disk_storage_used{instance=~\"$instance\"}",
           "format": "time_series",
+          "hide": false,
+          "interval": "",
           "intervalFactor": 2,
-          "legendFormat": "Total CPU {{instance}}",
-          "metric": "go_memstats_alloc_bytes",
+          "legendFormat": "used {{instance}}",
+          "metric": "process_start_time_seconds",
           "refId": "A",
-          "step": 4
+          "step": 60
+        },
+        {
+          "expr": "disk_storage_total{instance=~\"$instance\"}",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "total {{instance}}",
+          "metric": "process_start_time_seconds",
+          "refId": "B",
+          "step": 60
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Total CPU",
+      "title": "Disk Usage",
       "tooltip": {
-        "msResolution": false,
         "shared": true,
         "sort": 0,
-        "value_type": "cumulative"
+        "value_type": "individual"
       },
       "type": "graph",
       "xaxis": {
@@ -709,15 +708,16 @@
       },
       "yaxes": [
         {
-          "format": "s",
+          "decimals": null,
+          "format": "decbytes",
           "label": null,
           "logBase": 1,
           "max": null,
-          "min": null,
+          "min": "0",
           "show": true
         },
         {
-          "format": "s",
+          "format": "short",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -1053,5 +1053,5 @@
   "timezone": "",
   "title": "Minio Overview",
   "uid": "pJnnS4hZz",
-  "version": 4
+  "version": 1
 }
