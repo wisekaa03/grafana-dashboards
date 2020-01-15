@@ -16,86 +16,94 @@
   "editable": true,
   "gnetId": 10819,
   "graphTooltip": 0,
-  "iteration": 1579000374969,
+  "iteration": 1579072220010,
   "links": [],
   "panels": [
     {
       "cacheTimeout": null,
-      "columns": [
-        {
-          "text": "Current",
-          "value": "current"
-        }
+      "colorBackground": false,
+      "colorValue": false,
+      "colors": [
+        "#299c46",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
       ],
-      "datasource": "Prometheus",
-      "fontSize": "100%",
+      "datasource": null,
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
       "gridPos": {
-        "h": 7,
+        "h": 2,
         "w": 4,
         "x": 0,
         "y": 0
       },
-      "id": 9,
+      "id": 17,
+      "interval": null,
       "links": [],
-      "options": {},
-      "pageSize": null,
-      "scroll": true,
-      "showHeader": true,
-      "sort": {
-        "col": 0,
-        "desc": true
-      },
-      "styles": [
+      "mappingType": 1,
+      "mappingTypes": [
         {
-          "alias": "",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
+          "name": "value to text",
+          "value": 1
         },
         {
-          "alias": "Uptime",
-          "colorMode": "cell",
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "decimals": 2,
-          "link": false,
-          "pattern": "/.*/",
-          "thresholds": [
-            "600",
-            "1200"
-          ],
-          "type": "number",
-          "unit": "s"
+          "name": "range to text",
+          "value": 2
         }
       ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "options": {},
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false,
+        "ymax": null,
+        "ymin": null
+      },
+      "tableColumn": "",
       "targets": [
         {
-          "expr": "redis_uptime_in_seconds{release=~\"$release\"}",
-          "format": "time_series",
-          "interval": "",
-          "intervalFactor": 2,
-          "legendFormat": "{{ instance }}",
-          "metric": "",
-          "refId": "A",
-          "step": 1800
+          "expr": "redis_instance_info{role=\"master\"}",
+          "instant": true,
+          "legendFormat": "{{redis_version}}",
+          "refId": "A"
         }
       ],
-      "title": "Uptime",
-      "transform": "timeseries_aggregations",
-      "type": "table"
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Redis Version",
+      "transparent": true,
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "name"
     },
     {
       "cacheTimeout": null,
@@ -399,6 +407,84 @@
         "align": false,
         "alignLevel": null
       }
+    },
+    {
+      "cacheTimeout": null,
+      "columns": [
+        {
+          "text": "Current",
+          "value": "current"
+        }
+      ],
+      "datasource": "Prometheus",
+      "fontSize": "100%",
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 0,
+        "y": 2
+      },
+      "id": 9,
+      "links": [],
+      "options": {},
+      "pageSize": null,
+      "scroll": true,
+      "showHeader": true,
+      "sort": {
+        "col": 0,
+        "desc": true
+      },
+      "styles": [
+        {
+          "alias": "",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "Uptime",
+          "colorMode": "cell",
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "decimals": 2,
+          "link": false,
+          "pattern": "/.*/",
+          "thresholds": [
+            "600",
+            "1200"
+          ],
+          "type": "number",
+          "unit": "s"
+        }
+      ],
+      "targets": [
+        {
+          "expr": "redis_uptime_in_seconds{release=~\"$release\"}",
+          "format": "time_series",
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "{{ instance }}",
+          "metric": "",
+          "refId": "A",
+          "step": 1800
+        }
+      ],
+      "title": "Uptime",
+      "transform": "timeseries_aggregations",
+      "type": "table"
     },
     {
       "aliasColors": {},
@@ -1237,5 +1323,5 @@
   "timezone": "browser",
   "title": "Redis Dashboard",
   "uid": "ioVLum5Zk",
-  "version": 1
+  "version": 2
 }
