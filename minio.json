@@ -16,7 +16,7 @@
   "editable": true,
   "gnetId": 10946,
   "graphTooltip": 0,
-  "iteration": 1577695749322,
+  "iteration": 1580126845484,
   "links": [
     {
       "icon": "external link",
@@ -936,7 +936,7 @@
       }
     }
   ],
-  "refresh": "",
+  "refresh": "10s",
   "schemaVersion": 21,
   "style": "dark",
   "tags": [
